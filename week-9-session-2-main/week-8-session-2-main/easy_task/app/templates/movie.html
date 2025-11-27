@@ -1,6 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>{{ movie[1] }}</h1>
+<center>
 
-{% endblock %}
+  <!-- This is a class provided by Bootstrap - Jumbotrons just have some nice built in formatting -->
+  <div class="jumbotron">
+    <h1 class="display-4">{{ movie[1] }} by {{ movie[7] }}</h1>
+    <p class="lead">Written by {{ movie[7] }} and released in {{ movie[5] }}</p>
+    <hr class="my-4">
+    <p>{{ movie[2] }}</p>
+    {% if movie[10] == "False" %}
+    <a href="{{ url_for('all_movies', id=movie[0]) }}">
+      <button>Like</button>
+    </a>
+    {% else %}
+    <a href="{{ url_for('all_movies', id=movie[0]) }}">
+      <button>Unlike</button>
+    </a>
+    {% endif %}
+  </div>
+
+</center>
+ {% endblock %}

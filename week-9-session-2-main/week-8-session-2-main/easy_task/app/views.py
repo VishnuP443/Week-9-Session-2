@@ -31,18 +31,30 @@ def index():
 def all_movies():
     ''' Task 1 - you should edit this to render the correct template. '''
     movies = read_movies()
-    return "All Movies"
+    return render_template("view_all.html", title="Movie Collection", movies=movies)
 
 @app.route('/my_collection')
 def my_collection():
-    movies = read_movies()
-    return "My Collection"
+    movie = read_movies()
+    Movie_Title = movie[3]
+    pass
+
 
 @app.route("/movie/<int:id>")
 def movie(id):
-    return f"View movie id: {id}"
+    movie = read_movies()[id-1]
+    Movie_Title = movie[1]
+    print(movie)
+    return render_template("movie.html", title=Movie_Title, movie=movie)
+
 
 
 @app.route('/add/<int:id>')
 def add(id):
     return f"Add movie id {id}"
+
+def see_all():
+    pass
+
+
+
