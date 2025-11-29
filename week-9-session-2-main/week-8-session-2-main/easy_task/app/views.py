@@ -35,9 +35,9 @@ def all_movies():
 
 @app.route('/my_collection')
 def my_collection():
-    movie = read_movies()
-    Movie_Title = movie[3]
-    pass
+    movies = read_movies()
+    saved_movies = [m for m in movies if int(m[0]) in collection]
+    return render_template("collection.html", movies=saved_movies, title="My Collection")
 
 
 @app.route("/movie/<int:id>")
@@ -51,7 +51,10 @@ def movie(id):
 
 @app.route('/add/<int:id>')
 def add(id):
-    return f"Add movie id {id}"
+    if id not in collection:
+        collection.append(id)
+        flash("Movie added to your collection!")
+    return redirect(url_for('my_collection'))
 
 def see_all():
     pass

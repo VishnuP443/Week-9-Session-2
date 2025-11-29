@@ -1,7 +1,40 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>View Collection</h1>
+<h1 style="text-align:center;">My Movie Collection</h1>
+<hr>
 
+{% if movies %}
+<table style="width:80%; margin:auto; text-align:center; border-collapse:collapse;">
+
+    <tr style="font-weight:bold; border-bottom:2px solid #333;">
+        <th>Title</th>
+        <th>Director</th>
+        <th>Genre</th>
+        <th>Year</th>
+        <th></th>
+    </tr>
+
+    {% for m in movies %}
+    <tr style="border-bottom:1px solid #aaa;">
+        <td>{{ m[1] }}</td>
+        <td>{{ m[7] }}</td>
+        <td>{{ m[6] }}</td>
+        <td>{{ m[5] }}</td>
+        <td>
+            <a href="{{ url_for('movie', id=m[0]) }}">
+                <button>View Details</button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% else %}
+<p style="text-align:center; margin-top:30px; font-size:18px;">
+    You haven't added any movies yet.
+</p>
+{% endif %}
 
 {% endblock %}
